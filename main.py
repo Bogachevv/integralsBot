@@ -1,5 +1,3 @@
-import sys
-
 from funcBuilders import *
 from parser import *
 from calc import *
@@ -28,9 +26,7 @@ def calc_integral():
 
 
 def calc_func():
-    # var_dict = read_constants()
-    var_dict = {}
-    print("Running with empty var_dict", file=sys.stderr)
+    var_dict = read_constants()
     s = input("Input function: ").replace("\\", "/")
     s = f"({s})"
     print()
