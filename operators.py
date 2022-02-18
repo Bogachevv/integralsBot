@@ -14,10 +14,12 @@ def priority(s: str) -> int:
             return 3
         case "ln" | "sin" | "cos" | "tg" | "ctg" | "exp" | "sqrt":
             return 4
+        case "--":  # TODO: check unary '-' priority
+            return 5
 
 
 def is_operator(s: str) -> bool:
-    return s in ["+", "-", "*", "/", "ln", "sin", "cos", "tg", "ctg", "exp", "sqrt", "^"]
+    return s in ["+", "-", "--", "*", "/", "ln", "sin", "cos", "tg", "ctg", "exp", "sqrt", "^"]
 
 
 def calc_operation(op, left, right):
@@ -26,6 +28,8 @@ def calc_operation(op, left, right):
             return left + right
         case "-":
             return left - right
+        case "--":
+            return -right
         case "*":
             return left*right
         case "/":
@@ -49,7 +53,7 @@ def calc_operation(op, left, right):
 
 
 def is_unary(op: str) -> bool:
-    return op in ["ln", "sin", "cos", "tg", "ctg", "exp", "sqrt"]
+    return op in ["ln", "sin", "cos", "tg", "ctg", "exp", "sqrt", "--"]
 
 
 def get_var_val(v: str, other_vars: dict) -> str:

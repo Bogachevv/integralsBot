@@ -3,6 +3,7 @@ from operators import *
 
 def parse_str(s: str):
     elm = ""
+    is_bracket = False
     for ch in s:
         if ch == " ":
             if elm != "":
@@ -12,8 +13,14 @@ def parse_str(s: str):
             if elm != "":
                 yield elm
                 elm = ""
+            if ch == "(":
+                is_bracket = True
+            elif ch == "-" and is_bracket:
+                ch = "--"
+            # print(f"(debug): {ch} with flag: {is_bracket}")
             yield ch
         else:
+            is_bracket = False
             elm += ch
 
 
