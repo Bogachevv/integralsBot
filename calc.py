@@ -3,23 +3,21 @@ from operators import *
 
 def integral(func, a: float, b: float, eps=0.001):
     s = (func(a) + func(b)) / 2
-    h = (b-a)/8
-    x = a
-    while x+h < b:
-        x += h
-        s += func(x)
+    n = 4
+    h = (b-a)/n
+    for i in range(1, n):
+        s += func(a + i*h)
     cur_int = s*h
-    prev_int = cur_int
-    flag = True
-    while flag or (abs(cur_int - prev_int) > eps):
-        x = a - h/2
-        while x + h < b:
-            x += h
-            s += func(x)
+    prev_int = cur_int + 2*eps
+
+    while abs(cur_int - prev_int) > eps:
+        for i in range(n):
+            s += func(a + h/2 + i*h)
         h = h/2
+        n = n*2
         prev_int = cur_int
         cur_int = s * h
-        flag = False
+
     return cur_int
 
 

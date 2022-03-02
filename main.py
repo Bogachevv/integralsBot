@@ -1,6 +1,7 @@
 from funcBuilders import *
 from parser import *
 from calc import *
+import bot_core as bc
 
 
 def read_constants() -> dict:
@@ -22,6 +23,7 @@ def calc_integral():
     a, b = map(str_to_float(var_dict), input("Input limits: ").split())
     print()
     polish = translate(s)
+    print(polish)
     print(f"Integral(eps={0.001:.3f}) : {integral(build_fx(polish, var_dict), a, b):.3f}")
 
 
@@ -36,4 +38,5 @@ def calc_func():
 
 if __name__ == '__main__':
     # calc_integral()
-    calc_func()
+    # calc_func()
+    bc.run()
